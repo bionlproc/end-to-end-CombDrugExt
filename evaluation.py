@@ -17,7 +17,7 @@ parser.add_argument('--ner', type=bool, default=False,
                     help="evaluation on NER results")
 
 parser.add_argument('--metric', type=str, default=None,
-                    help="evaluation metric, [positive combination f1] or [any combination f1]")
+                    help="evaluation metric, [positive_combination_f1] or [any_combination_f1]")
 
 args = parser.parse_args()
 
@@ -87,15 +87,15 @@ if args.ner:
             pred_rels = pred_ann.get('POS', [])
             dedup_pred_rels = set(pred_rels)
             pred_sum += len(dedup_pred_rels)
-            if args.metric == 'any combination f1':
+            if args.metric == 'any_combination_f1':
                 pred_rels = pred_ann.get('COMB', [])
                 dedup_pred_rels = set(pred_rels)
                 pred_sum += len(dedup_pred_rels)
             if gold_ann:
-                if args.metric == 'positive combination f1':
+                if args.metric == 'positive_combination_f1':
                     gold_rels = gold_ann.get('POS', [])
                     pred_rels = pred_ann.get('POS', [])
-                if args.metric == 'any combination f1':
+                if args.metric == 'any_combination_f1':
                     gold_rels = gold_ann.get('POS', []) + gold_ann.get('COMB', [])
                     pred_rels = pred_ann.get('POS', []) + pred_ann.get('COMB', [])
                 # convert to a set, as we don't care about duplicates or order.
@@ -124,7 +124,7 @@ if args.ner:
     print('F1: ', Fscore)
 
 # do positive combination evaluation
-if not args.ner and args.metric == 'positive combination f1':
+if not args.ner and args.metric == 'positive_combination_f1':
     # initialization
     true_positive_sum, pred_sum, true_sum = 0, 0, 0
     predictions=[]
@@ -169,7 +169,7 @@ if not args.ner and args.metric == 'positive combination f1':
     print('F1: ', Fscore)
 
 # do any combination 3-way evaluation
-if not args.ner and args.metric == 'any combination f1':
+if not args.ner and args.metric == 'any_combination_f1':
     # initialization
     true_positive_sum, pred_sum, true_sum = 0, 0, 0
     predictions=[]
