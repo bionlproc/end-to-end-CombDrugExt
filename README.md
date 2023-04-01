@@ -32,4 +32,4 @@ Example for evaluation on `n-ary/test.txt` file with fine-tuned model `model.tar
 python evaluation.py\
           --model output/model.tar.gz\
           --test_file drug-combo-extraction/n-ary/test.txt\
-          --metric positive combination f1\
+          --metric positive_combination_f1\
